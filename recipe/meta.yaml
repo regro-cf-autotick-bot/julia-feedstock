@@ -32,10 +32,9 @@ source:
     # of stdlib/REPL/src/precompile.jl using the same prompt_ready/activate_done event
     # synchronization approach, so this no longer applies (and is no longer needed)
     # - patches/repl-precompile.patch
-    # backport https://github.com/JuliaLang/julia/pull/60778: `xcrun --show-sdk-version` fails
-    # to resolve the SDK on current CI images, leaving MACOS_PLATFORM_VERSION empty and breaking
-    # the bundled lld at precompile time with "malformed sdk version"
-    - patches/xcrun-sdk-version.patch  # [osx]
+    # backport of https://github.com/JuliaLang/julia/pull/60778 (`xcrun --sdk macosx
+    # --show-sdk-version`) is already included upstream as of 1.13.4, so the patch no longer applies
+    # - patches/xcrun-sdk-version.patch  # [osx]
     # v1.12.7 regression from JuliaLang/julia@fde4693fc51 (backport of #61652 + #62152): the
     # Darwin whole_archive macro now unconditionally passes -force_load, which breaks when
     # LIBUTF8PROC is a -lutf8proc flag (USE_SYSTEM_UTF8PROC=1) rather than a static archive path,
