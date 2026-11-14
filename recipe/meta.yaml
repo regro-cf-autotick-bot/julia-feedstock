@@ -64,6 +64,11 @@ requirements:
     - curl
     - libgit2   # [not osx]
     - libssh2
+    # TEMPORARY: libcxx 23.1.5 rebuilds (build number >= 1, uploaded 2026-11-13) no longer
+    # export std::__1::__vector_base_common<true>::__throw_length_error() and
+    # __basic_string_common<true>::__throw_length_error(), which the prebuilt static libLLVM*.a
+    # need, so libjulia-internal fails to link on osx-64. Build 0 works (see #318).
+    - libcxx 23.1.5 *_0  # [osx]
     - libosxunwind  # [osx]
     - libunwind  # [linux]
     - mpfr
